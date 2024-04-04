@@ -17,7 +17,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className="flex flex-col min-h-full">
+		<html lang="en" className="flex flex-col min-h-full emerald">
 			<body
 				style={{ textRendering: "optimizeLegibility" }}
 				className={cn(
