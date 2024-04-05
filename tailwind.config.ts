@@ -21,7 +21,8 @@ const config = {
 				family: "family",
 			},
 			fontSize: {
-				clamped: "clamp(1.375rem, 2.225vw, 2rem)",
+				md: "16px",
+				clamped: "clamp(1.25rem, 2.225vw, 1.5rem)",
 			},
 			letterSpacing: {
 				tightest: "-0.0015em",
@@ -29,6 +30,8 @@ const config = {
 			colors: {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
+				muted: "hsl(var(--muted))",
+
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
 			},

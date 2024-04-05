@@ -1,27 +1,19 @@
-import { cn, getPostPath } from "@/lib/utils";
-import fs from "fs";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { serialize } from "next-mdx-remote/serialize";
+import { allBlogs } from "@/.contentlayer/generated";
+import { BlogLink } from "@/components/blog-link";
+import { H2, P } from "@/components/typography";
 
 export default async function Home() {
-	const post = fs.readFileSync(getPostPath("welcome"));
-	const serialized = await serialize(post, { parseFrontmatter: true });
-
 	return (
-		<main className="h-full">
-			<MDXRemote
-				source={post}
-				components={{
-					h1: (props) => (
-						<h1
-							{...props}
-							className={cn(
-								"text-[50%] font-extrabold uppercase font-sans text-white"
-							)}
-						/>
-					),
-				}}
-			/>
+		<main className="h-full font-family text-clamped">
+			<P>I build things using code.</P>
+			<P>
+				Currently, Software Engineer at Merantix Momentum. Located in Berlin,
+				Germany.
+			</P>
+			<H2 className="my-6">Latest blogs</H2>
+			{allBlogs.slice(0, 5).map((blog) => (
+				<BlogLink blog={blog} key={blog.slug} />
+			))}
 		</main>
 	);
 }
