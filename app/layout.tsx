@@ -21,7 +21,7 @@ export default function RootLayout({
 			<body
 				style={{ textRendering: "optimizeLegibility" }}
 				className={cn(
-					"grow bg-background font-sans antialiased px-[1.5em] w-[min(100%,34em)] mx-auto"
+					"mb-8 grow bg-background font-sans antialiased px-[1.5em] w-[min(100%,34.5em)] mx-auto text-clamped"
 				)}
 			>
 				<Nav />

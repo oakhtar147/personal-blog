@@ -1,4 +1,4 @@
-import { cn, formatBlogDate } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { VariantProps, cva } from "class-variance-authority";
 
 export function H1({ className, ...props }: React.ComponentProps<"h1">) {
@@ -31,7 +31,7 @@ export function H3({ className, ...props }: React.ComponentProps<"h3">) {
 	);
 }
 
-const paraVariants = cva("[&:not(:first-child)]:mt-6", {
+const paraVariants = cva("font-family [&:not(:first-child)]:mt-6", {
 	variants: {
 		variant: {
 			default: "",
@@ -49,14 +49,14 @@ export function P({ className, variant, ...props }: ParaProps) {
 	return <p {...props} className={paraVariants({ variant, className })} />;
 }
 
-type TimeProps = Omit<React.ComponentProps<"time">, "children"> & {
-	date: Date | string;
-};
-
-export function Time({ className, date, ...props }: TimeProps) {
+export function Time({
+	className,
+	children,
+	...props
+}: React.ComponentProps<"time">) {
 	return (
 		<time {...props} className={cn("text-xs font-sans uppercase", className)}>
-			{formatBlogDate(date)}
+			{children}
 		</time>
 	);
 }

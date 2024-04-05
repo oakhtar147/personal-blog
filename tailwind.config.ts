@@ -22,7 +22,7 @@ const config = {
 			},
 			fontSize: {
 				md: "16px",
-				clamped: "clamp(1.25rem, 2.225vw, 1.5rem)",
+				clamped: "clamp(1.375rem, 2.225vw, 2rem)",
 			},
 			letterSpacing: {
 				tightest: "-0.0015em",

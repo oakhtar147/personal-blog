@@ -4,7 +4,7 @@ import { H2, P } from "@/components/typography";
 
 export default async function Home() {
 	return (
-		<main className="h-full font-family text-clamped">
+		<main className="h-full text-lg">
 			<P>I build things using code.</P>
 			<P>
 				Currently, Software Engineer at Merantix Momentum. Located in Berlin,
