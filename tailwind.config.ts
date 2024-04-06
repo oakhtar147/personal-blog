@@ -19,7 +19,7 @@ const config = {
 		},
 		extend: {
 			fontFamily: {
-				family: "family",
+				clearface: "var(--font-clearface)",
 			},
 			fontSize: {
 				md: "16px",

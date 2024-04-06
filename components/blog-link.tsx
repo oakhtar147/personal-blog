@@ -9,21 +9,27 @@ type BlogLinkProps = {
 
 export function BlogLink({ blog }: BlogLinkProps) {
 	return (
-		<div className="hover:bg-muted hover:text-white transition-colors p-2 rounded-sm">
-			<Link href={blog.url}>
-				<div className="flex justify-between items-baseline">
+		<div>
+			<div className="flex justify-between gap-3 items-baseline">
+				<Link href={blog.url} className="hover:underline">
 					<H3>{blog.title}</H3>
-					<time
-						dateTime={blog.date}
-						className="text-xs font-sans uppercase font-semibold shrink-0"
-					>
-						{formatBlogDate(blog.date)}
-					</time>
-				</div>
-				<P className="!mt-1 text-md" font="sans">
-					{blog.description}
-				</P>
-			</Link>
+				</Link>
+				<time
+					dateTime={blog.date}
+					className="text-xs font-sans uppercase font-semibold shrink-0"
+				>
+					{formatBlogDate(blog.date)}
+				</time>
+			</div>
+			<div className="flex items-end  gap-2">
+				<P className="!mt-1 text-lg line-clamp-2 grow">{blog.description}</P>
+				<Link
+					href={blog.url}
+					className="underline text-sm shrink-0 leading-[inherit] text-white"
+				>
+					Read more
+				</Link>
+			</div>
 		</div>
 	);
 }

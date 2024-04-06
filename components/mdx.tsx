@@ -37,7 +37,7 @@ const paraVariants = cva("[&:not(:first-child)]:mt-6", {
 		font: {
 			sans: "font-sans",
 			serif: "font-serif",
-			family: "font-family",
+			family: "font-clearface",
 		},
 	},
 	defaultVariants: {

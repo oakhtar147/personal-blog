@@ -2,11 +2,38 @@ import "@/app/globals.css";
 import "@/app/mdx.css";
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
+
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const clearFaceFont = localFont({
+	variable: "--font-clearface",
+	src: [
+		{
+			path: "../../../fonts/clearface-regular.ttf",
+			weight: "400",
+			style: "normal",
+		},
+		{
+			path: "../../../fonts/clearface-italic.ttf",
+			weight: "400",
+			style: "italic",
+		},
+		{
+			path: "../../../fonts/clearface-bold.ttf",
+			weight: "700",
+			style: "normal",
+		},
+		{
+			path: "../../../fonts/clearface-bold-italic.ttf",
+			weight: "700",
+			style: "italic",
+		},
+	],
+});
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -23,7 +50,8 @@ export default function BlogLayout({
 			<body
 				style={{ textRendering: "optimizeLegibility" }}
 				className={cn(
-					"flex flex-col grow bg-background font-sans antialiased px-[1.5em] w-[min(100%,34.5em)] mx-auto text-clamped"
+					"flex flex-col grow bg-background font-sans antialiased px-[1.5em] w-[min(100%,34.5em)] mx-auto text-clamped",
+					clearFaceFont.variable
 				)}
 			>
 				<Nav />

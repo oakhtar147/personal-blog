@@ -1,10 +1,10 @@
 ---
 title: Sync Local Storage state across tabs in React using useSyncExternalStore
-description: In our context, the external store refers to local storage. useSyncExternalStore allows us to bridge the gap between React and local storage by subscribing a component to local storage.
-date: 2023-07-25
+description: In our context, the external store refers to local storage. `useSyncExternalStore` allows us to bridge the gap between React and local storage by subscribing a component to local storage.
+date: 2023-08-25
 ---
 
-# Sync Local Storage state across tabs in React using useSyncExternalStore
+# Sync Local Storage state across tabs in React using `useSyncExternalStore`
 
 Local storage is a good place used commonly to store data (not auth tokens though!) that needs to be persisted between sessions.
 
@@ -12,9 +12,9 @@ You can conveniently store user preferences like a collapsed or expanded sidebar
 
 From the [official docs](https://react.dev/reference/react/useSyncExternalStore):
 
-> useSyncExternalStore is a React Hook that lets you subscribe to an external store.
+> `useSyncExternalStore` is a React Hook that lets you subscribe to an external store.
 
-In our context, the external store refers to local storage. useSyncExternalStore allows us to bridge the gap between React and local storage by subscribing a component to local storage.
+In our context, the external store refers to local storage. `useSyncExternalStore` allows us to bridge the gap between React and local storage by subscribing a component to local storage.
 
 Code that’s used in the example above:
 
@@ -117,8 +117,8 @@ function App() {
 
 `useSyncExternalStore` accepts two required arguments:
 
-1. The subscribe function should subscribe to the store and return a function that unsubscribes. The listener argument in this function automatically listens to storage events and rerenders the component on changes.
-2. The getSnapshot function should read a snapshot of the data from the store. To keep things simple, you should avoid returning immutable data (e.g. objects) since they are different on every getSnapshot invocation and will cause infinite re-renders. If you need to, you should cache the return value of getSnapshot.
+1. The `subscribe` function should subscribe to the store and return a function that unsubscribes. The `listener` argument in this function automatically listens to storage events and rerenders the component on changes.
+2. The `getSnapshot` function should read a snapshot of the data from the store. To keep things simple, you should avoid returning immutable data (e.g. objects) since they are different on every getSnapshot invocation and will cause infinite re-renders. If you need to, you should cache the return value of getSnapshot.
    These two functions connect the data persisted in local storage to React, and allow reactivity across tabs and windows.
 
 ### Bonus: Extract the store to a custom hook

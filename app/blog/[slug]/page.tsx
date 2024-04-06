@@ -1,4 +1,5 @@
 import { allBlogs } from "@/.contentlayer/generated";
+import { BlogFooter } from "@/components/blog-footer";
 import { MDXContent } from "@/components/mdx-content";
 import { notFound } from "next/navigation";
 
@@ -15,5 +16,10 @@ export default function Blog({ params }: BlogPageParams) {
 		return notFound();
 	}
 
-	return <MDXContent source={blog.body.code} />;
+	return (
+		<article>
+			<MDXContent source={blog.body.code} />
+			<BlogFooter dateWritten={new Date(blog.date)} />
+		</article>
+	);
 }
