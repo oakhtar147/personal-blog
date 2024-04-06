@@ -15,7 +15,7 @@ export function BlogLink({ blog }: BlogLinkProps) {
 					<H3>{blog.title}</H3>
 					<Time dateTime={blog.date}>{formatBlogDate(blog.date)}</Time>
 				</div>
-				<P variant="description" className="!mt-1">
+				<P variant="description" className="!mt-1" font="sans">
 					{blog.description}
 				</P>
 			</Link>
