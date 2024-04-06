@@ -1,0 +1,156 @@
+---
+title: Sync Local Storage state across tabs in React using useSyncExternalStore
+description: In our context, the external store refers to local storage. useSyncExternalStore allows us to bridge the gap between React and local storage by subscribing a component to local storage.
+date: 2023-07-25
+---
+
+# Sync Local Storage state across tabs in React using useSyncExternalStore
+
+Local storage is a good place used commonly to store data (not auth tokens though!) that needs to be persisted between sessions.
+
+You can conveniently store user preferences like a collapsed or expanded sidebar in local storage. However, updates won’t sync across multiple tabs. To solve this, use the useSyncExternalStore hook in React to ensure consistent data across tabs.
+
+From the [official docs](https://react.dev/reference/react/useSyncExternalStore):
+
+> useSyncExternalStore is a React Hook that lets you subscribe to an external store.
+
+In our context, the external store refers to local storage. useSyncExternalStore allows us to bridge the gap between React and local storage by subscribing a component to local storage.
+
+Code that’s used in the example above:
+
+```tsx
+import React from "react";
+
+type SidebarState = "collapsed" | "expanded";
+
+const get = () => localStorage.getItem("sidebar") as SidebarState;
+const set = (value: SidebarState) => localStorage.setItem("sidebar", value);
+
+if (!get()) {
+	set("collapsed");
+}
+
+function App() {
+	const [sidebarState, setSidebarState] = React.useState<SidebarState>(get());
+
+	React.useEffect(() => {
+		set(sidebarState);
+	}, [sidebarState]);
+
+	const handleToggle = () =>
+		setSidebarState(sidebarState === "collapsed" ? "expanded" : "collapsed");
+
+	return (
+		<>
+			<p>
+				The sidebar is{" "}
+				<span style={{ color: sidebarState === "collapsed" ? "red" : "green" }}>
+					{sidebarState}
+				</span>
+			</p>
+			<button onClick={handleToggle}>Toggle State</button>
+		</>
+	);
+}
+```
+
+1. We only use local storage as an initial state for React’s `useState`. This is needed to achieve reactivity, otherwise React won’t update the UI (re-render) on direct updates to local storage.
+2. `useState` means the state is coupled with this component instance—which means it won’t sync across tabs.
+3. Lastly, `useState` means we need to sync local storage with changes, so that the next time the app is loaded, we get the latest state that was set.
+
+### Example with `useSyncExternalStore`
+
+The correct way to do it 💪
+
+Code that’s used in the example above:
+
+```tsx {28-31}
+import React from "react";
+
+type SidebarState = "collapsed" | "expanded";
+
+function setSidebarState(newValue: SidebarState) {
+	window.localStorage.setItem("sidebar", newValue);
+	// On localStoage.setItem, the storage event is only triggered on other tabs and windows.
+	// So we manually dispatch a storage event to trigger the subscribe function on the current window as well.
+	window.dispatchEvent(
+		new StorageEvent("storage", { key: "sidebar", newValue })
+	);
+}
+
+const store = {
+	getSnapshot: () => localStorage.getItem("sidebar") as SidebarState,
+	subscribe: (listener: () => void) => {
+		window.addEventListener("storage", listener);
+		return () => void window.removeEventListener("storage", listener);
+	},
+};
+
+// Set the initial value.
+if (!store.getSnapshot()) {
+	localStorage.setItem("sidebar", "collapsed" satisfies SidebarState);
+}
+
+function App() {
+	const sidebarState = React.useSyncExternalStore(
+		store.subscribe,
+		store.getSnapshot
+	);
+
+	const handleToggle = () => {
+		setSidebarState(sidebarState === "expanded" ? "collapsed" : "expanded");
+	};
+
+	return (
+		<>
+			<p>
+				The sidebar is
+				<span style={{ color: sidebarState === "collapsed" ? "red" : "green" }}>
+					{sidebarState}
+				</span>
+			</p>
+			<button onClick={handleToggle}>Toggle State</button>
+		</>
+	);
+}
+```
+
+`useSyncExternalStore` accepts two required arguments:
+
+1. The subscribe function should subscribe to the store and return a function that unsubscribes. The listener argument in this function automatically listens to storage events and rerenders the component on changes.
+2. The getSnapshot function should read a snapshot of the data from the store. To keep things simple, you should avoid returning immutable data (e.g. objects) since they are different on every getSnapshot invocation and will cause infinite re-renders. If you need to, you should cache the return value of getSnapshot.
+   These two functions connect the data persisted in local storage to React, and allow reactivity across tabs and windows.
+
+### Bonus: Extract the store to a custom hook
+
+Finally, you can extract the logic to a custom hook:
+
+```tsx
+import React from "react";
+
+type SidebarState = "collapsed" | "expanded";
+
+function useSidebarState() {
+	const setSidebarState = (newValue: SidebarState) => {
+		window.localStorage.setItem("sidebar", newValue);
+		window.dispatchEvent(
+			new StorageEvent("storage", { key: "sidebar", newValue })
+		);
+	};
+
+	const getSnapshot = () => localStorage.getItem("sidebar") as SidebarState;
+
+	const subscribe = (listener: () => void) => {
+		window.addEventListener("storage", listener);
+		return () => void window.removeEventListener("storage", listener);
+	};
+
+	const store = React.useSyncExternalStore(subscribe, getSnapshot);
+
+	return [store, setSidebarState] as const;
+}
+```
+
+### Summary
+
+Today, we learned that the combination of `useState` and `useEffect` is not the ideal way to manage the state using data that lives in local storage. We can use local storage as an external store that communicates with React using `useSyncExternalStore`.

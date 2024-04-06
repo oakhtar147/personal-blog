@@ -1,4 +1,5 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import rehypePrettyCode from "rehype-pretty-code";
 
 export const Blog = defineDocumentType(() => ({
 	name: "Blog",
@@ -16,9 +17,23 @@ export const Blog = defineDocumentType(() => ({
 		},
 		slug: {
 			type: "string",
-			resolve: (blog) => blog._raw.flattenedPath,
+			resolve: (blog) => blog._raw.sourceFileName.replace(/\.mdx$/, ""),
 		},
 	},
 }));
 
-export default makeSource({ contentDirPath: "posts", documentTypes: [Blog] });
+export default makeSource({
+	contentDirPath: "content",
+	documentTypes: [Blog],
+	mdx: {
+		rehypePlugins: [
+			[
+				// @ts-expect-error
+				rehypePrettyCode,
+				{
+					theme: "vesper",
+				},
+			],
+		],
+	},
+});

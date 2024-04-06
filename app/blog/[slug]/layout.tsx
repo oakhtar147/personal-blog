@@ -1,4 +1,5 @@
 import "@/app/globals.css";
+import "@/app/mdx.css";
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
 import { cn } from "@/lib/utils";

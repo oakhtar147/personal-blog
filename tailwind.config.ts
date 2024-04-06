@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config = {
+	darkMode: ["class"],
 	content: [
 		"./pages/**/*.{ts,tsx}",
 		"./components/**/*.{ts,tsx}",
@@ -22,7 +23,7 @@ const config = {
 			},
 			fontSize: {
 				md: "16px",
-				clamped: "clamp(1.25rem, 2.225vw, 1.75rem)",
+				clamped: "clamp(1.25rem, 2.225vw, 1.5rem)",
 			},
 			letterSpacing: {
 				tightest: "-0.0015em",
@@ -30,10 +31,9 @@ const config = {
 			colors: {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
-				muted: "hsl(var(--muted))",
-
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
+				muted: "hsl(var(--muted))",
 			},
 			borderRadius: {
 				lg: "var(--radius)",

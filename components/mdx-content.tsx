@@ -63,6 +63,42 @@ export function MDXContent({ source }: { source: string }) {
 						)}
 					/>
 				),
+
+				pre: ({ className, ...props }: React.ComponentProps<"pre">) => (
+					<div className="mb-4 mt-6 overflow-auto max-h-[640px] rounded-lg border ">
+						<pre
+							{...props}
+							className={cn(
+								"py-2 [&>code]:bg-[unset] [&>code]:p-[unset] [&>code]:font-normal overflow-auto relative",
+								className
+							)}
+						/>
+					</div>
+				),
+
+				code: ({ className, ...props }: React.ComponentProps<"code">) => (
+					<code
+						{...props}
+						className={cn(
+							"relative [&>span[data-line]]:px-4  font-semibold bg-muted px-[0.3rem] py-[0.2rem] rounded font-mono text-sm",
+							className
+						)}
+					/>
+				),
+
+				ol: ({
+					className,
+					...props
+				}: React.HTMLAttributes<HTMLOListElement>) => (
+					<ol
+						className={cn("my-6 ml-6 font-family list-decimal", className)}
+						{...props}
+					/>
+				),
+
+				li: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+					<li className={cn("mt-2 font-family", className)} {...props} />
+				),
 			}}
 		/>
 	);
