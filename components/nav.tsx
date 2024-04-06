@@ -1,6 +1,7 @@
 import scribble from "@/public/scribble.svg";
 import Image from "next/image";
 import Link from "next/link";
+import { NavLink } from "./nav-link";
 
 export function Nav() {
 	return (
@@ -9,12 +10,12 @@ export function Nav() {
 				<Image src={scribble} priority alt="scribble" width={50} height={50} />
 				<h1 className="font-extrabold text-white">OSAMA</h1>
 			</Link>
-			<Link
-				className="px-2 hover:bg-muted rounded-md font-extrabold text-white tracking-normal transition-all"
+			<NavLink
+				className="px-2 hover:bg-muted rounded-md font-extrabold text-white tracking-normal transition-all data-[active=true]:bg-muted"
 				href="/blog"
 			>
 				Blog
-			</Link>
+			</NavLink>
 		</nav>
 	);
 }

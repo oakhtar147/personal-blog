@@ -60,7 +60,10 @@ export function Time({
 	...props
 }: React.ComponentProps<"time">) {
 	return (
-		<time {...props} className={cn("text-xs font-sans uppercase", className)}>
+		<time
+			{...props}
+			className={cn("text-xs font-sans uppercase font-semibold", className)}
+		>
 			{children}
 		</time>
 	);

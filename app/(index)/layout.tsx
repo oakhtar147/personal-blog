@@ -1,3 +1,4 @@
+import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -19,10 +20,11 @@ export default function RootLayout({
 		<html lang="en" className="flex flex-col min-h-full emerald">
 			<body
 				style={{ textRendering: "optimizeLegibility" }}
-				className="mb-8 grow bg-background font-sans antialiased px-[1.5em] w-[min(100%,640px)] mx-auto text-clamped"
+				className="flex flex-col grow bg-background font-sans antialiased px-[1.5em] w-[min(100%,640px)] mx-auto text-clamped"
 			>
 				<Nav />
 				{children}
+				<Footer />
 			</body>
 		</html>
 	);

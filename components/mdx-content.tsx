@@ -3,7 +3,6 @@ import { H1, H2, H3, P, Time } from "./typography";
 
 export function MDXContent({ source }: { source: string }) {
 	const Content = useMDXComponent(source);
-	console.log({ Content });
 
 	return (
 		<Content

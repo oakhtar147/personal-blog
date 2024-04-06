@@ -1,4 +1,5 @@
 import "@/app/globals.css";
+import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -21,11 +22,12 @@ export default function BlogLayout({
 			<body
 				style={{ textRendering: "optimizeLegibility" }}
 				className={cn(
-					"mb-8 grow bg-background font-sans antialiased px-[1.5em] w-[min(100%,34.5em)] mx-auto text-clamped"
+					"flex flex-col grow bg-background font-sans antialiased px-[1.5em] w-[min(100%,34.5em)] mx-auto text-clamped"
 				)}
 			>
 				<Nav />
 				{children}
+				<Footer />
 			</body>
 		</html>
 	);

@@ -4,7 +4,7 @@ import { H2, P } from "@/components/typography";
 
 export default async function Home() {
 	return (
-		<main className="h-full text-lg">
+		<main className="h-full text-lg grow">
 			<P font="sans">I build things using code.</P>
 			<P font="sans">
 				Currently, Software Engineer at Merantix Momentum. Located in Berlin,
