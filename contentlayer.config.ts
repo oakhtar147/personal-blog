@@ -9,6 +9,7 @@ export const Blog = defineDocumentType(() => ({
 		title: { type: "string", required: true },
 		description: { type: "string", required: true },
 		date: { type: "date", required: true },
+		published: { type: "boolean", required: true },
 	},
 	computedFields: {
 		url: {
