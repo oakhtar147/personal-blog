@@ -12,7 +12,7 @@ export function H1({ className, ...props }: React.ComponentProps<"h1">) {
 
 export function H2({ className, ...props }: React.ComponentProps<"h2">) {
 	return (
-		<h1
+		<h2
 			{...props}
 			className={cn("font-bold font-sans text-white", className)}
 		/>
@@ -21,7 +21,7 @@ export function H2({ className, ...props }: React.ComponentProps<"h2">) {
 
 export function H3({ className, ...props }: React.ComponentProps<"h3">) {
 	return (
-		<h1
+		<h3
 			{...props}
 			className={cn("font-semibold text-lg font-sans text-white", className)}
 		/>
@@ -54,17 +54,26 @@ export function P({ className, variant, font, ...props }: ParaProps) {
 	);
 }
 
-export function Time({
+export function A({
 	className,
-	children,
 	...props
-}: React.ComponentProps<"time">) {
+}: React.HTMLAttributes<HTMLAnchorElement>) {
 	return (
-		<time
+		<a
+			className={cn("font-medium underline underline-offset-4", className)}
 			{...props}
-			className={cn("text-xs font-sans uppercase font-semibold", className)}
-		>
-			{children}
-		</time>
+		/>
+	);
+}
+
+export function Blockquote({
+	className,
+	...props
+}: React.HTMLAttributes<HTMLElement>) {
+	return (
+		<blockquote
+			className={cn("mt-6 border-l-2 pl-6 italic", className)}
+			{...props}
+		/>
 	);
 }
