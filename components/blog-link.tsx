@@ -1,5 +1,6 @@
 import { Blog } from "@/.contentlayer/generated";
 import { formatBlogDate } from "@/lib/utils";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { H3, P } from "./mdx";
 
@@ -12,7 +13,7 @@ export function BlogLink({ blog }: BlogLinkProps) {
 		<div>
 			<div className="flex justify-between gap-3 items-baseline">
 				<Link href={blog.url} className="hover:underline">
-					<H3>{blog.title}</H3>
+					<H3 className="line-clamp-2">{blog.title}</H3>
 				</Link>
 				<time
 					dateTime={blog.date}
@@ -25,9 +26,10 @@ export function BlogLink({ blog }: BlogLinkProps) {
 				<P className="!mt-1 text-lg line-clamp-2 grow">{blog.description}</P>
 				<Link
 					href={blog.url}
-					className="underline text-sm shrink-0 leading-[inherit] text-white"
+					className="underline inline-flex items-center gap-1 text-sm shrink-0 leading-[inherit] text-white"
 				>
-					Read more
+					Continue
+					<ArrowRightIcon />
 				</Link>
 			</div>
 		</div>

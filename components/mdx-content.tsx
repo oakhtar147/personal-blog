@@ -1,41 +1,117 @@
 import { cn } from "@/lib/utils";
+import sizeOf from "image-size";
 import { useMDXComponent } from "next-contentlayer/hooks";
+import Image from "next/image";
+import path from "path";
+import React from "react";
 
 export const mdxComponents = {
 	h1: ({ className, ...props }: React.ComponentProps<"h1">) => (
 		<h1
 			{...props}
-			className={cn("font-extrabold font-sans text-white", className)}
+			className={cn(
+				"font-extrabold mt-8 scroll-m-20 font-sans text-white",
+				className
+			)}
 		/>
 	),
 
 	h2: ({ className, ...props }: React.ComponentProps<"h2">) => (
 		<h2
 			{...props}
-			className={cn("font-bold font-sans text-white", className)}
+			className={cn(
+				"font-bold mt-8 scroll-m-20 font-sans text-white",
+				className
+			)}
 		/>
 	),
 
 	h3: ({ className, ...props }: React.ComponentProps<"h3">) => (
 		<h3
 			{...props}
-			className={cn("font-semibold text-lg font-sans text-white", className)}
+			className={cn(
+				"font-semibold mt-8 scroll-m-20 text-lg font-sans text-white",
+				className
+			)}
 		/>
 	),
 
-	p: ({ className, ...props }: React.ComponentProps<"p">) => (
-		<p
-			{...props}
-			className={cn("font-clearface [&:not(:first-child)]:mt-6", className)}
-		/>
-	),
+	p: ({
+		className,
+		children,
+
+		...props
+	}: React.ComponentProps<"p">) => {
+		// Pleases TypeScript when passing `components` to <Content />
+		const { __hasImageDescendant__ } =
+			props as unknown as React.ComponentProps<"p"> & {
+				__hasImageDescendant__: boolean;
+			};
+
+		if (__hasImageDescendant__) {
+			return children;
+		}
+
+		return (
+			<p
+				{...props}
+				className={cn("font-clearface [&:not(:first-child)]:mt-6", className)}
+			>
+				{children}
+			</p>
+		);
+	},
 
 	a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
 		<a
 			{...props}
-			className={cn("underline font-medium underline-offset-4", className)}
+			target="_blank"
+			className={cn(
+				"underline font-medium underline-offset-4 hover:text-muted-foreground transition-colors",
+				className
+			)}
 		/>
 	),
+
+	img: ({ className, ...other }: React.ComponentProps<"img">) => {
+		const props = { ...other };
+		if (!props.src) return null;
+
+		const isLocalImage = !props.src.startsWith("http");
+
+		if (!props.width && !props.height && isLocalImage) {
+			const basePath = "/pictures";
+
+			if (!props.src.startsWith(basePath) && isLocalImage) {
+				props.src = `${basePath}${props.src}`;
+			}
+
+			const { width, height } = sizeOf(
+				path.join(process.cwd(), "public", props.src)
+			);
+
+			props.width = width || 640;
+			props.height = height || 640;
+		}
+
+		return (
+			<figure className="mt-6">
+				<picture>
+					<Image
+						{...props}
+						className={cn("w-full h-auto rounded-lg", className)}
+						alt={props.alt || "Image"}
+						src={props.src}
+						width={(props.width as number) || 640}
+						height={(props.height as number) || 360}
+					/>
+				</picture>
+				<figcaption className="text-center mt-1 text-md text-muted-foreground font-clearface">
+					{props.title}
+				</figcaption>
+			</figure>
+		);
+	},
 
 	blockquote: ({ className, ...props }: React.ComponentProps<"blockquote">) => (
 		<blockquote
@@ -67,6 +143,10 @@ export const mdxComponents = {
 				className
 			)}
 		/>
+	),
+
+	ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
+		<ul className={cn("my-6 ml-6 list-['—_']", className)} {...props} />
 	),
 
 	ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (

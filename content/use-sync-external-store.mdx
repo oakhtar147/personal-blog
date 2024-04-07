@@ -7,15 +7,21 @@ published: true
 
 # Sync Local Storage state across tabs in React using `useSyncExternalStore`
 
-Local storage is a good place used commonly to store data (not auth tokens though!) that needs to be persisted between sessions.
+Local storage is a good place used commonly to store data (not authentication tokens though!) that needs to be persisted between sessions.
 
-You can conveniently store user preferences like a collapsed or expanded sidebar in local storage. However, updates won’t sync across multiple tabs. To solve this, use the useSyncExternalStore hook in React to ensure consistent data across tabs.
+You can conveniently store user preferences like a collapsed or expanded sidebar in local storage. However, updates won’t sync across multiple tabs. To solve this, use the `useSyncExternalStore` hook in React to ensure consistent data across tabs.
 
 From the [official docs](https://react.dev/reference/react/useSyncExternalStore):
 
 > `useSyncExternalStore` is a React Hook that lets you subscribe to an external store.
 
 In our context, the external store refers to local storage. `useSyncExternalStore` allows us to bridge the gap between React and local storage by subscribing a component to local storage.
+
+### Example with `useState` & `useEffect`
+
+Let’s first see an example of a bad practice that does not work properly
+
+![A wrong example GIF](/use-sync-external-store/wrong-example.gif "State is not synced across tabs and is inconsistent with local storage value")
 
 Code that’s used in the example above:
 
@@ -55,13 +61,15 @@ function App() {
 }
 ```
 
-1. We only use local storage as an initial state for React’s `useState`. This is needed to achieve reactivity, otherwise React won’t update the UI (re-render) on direct updates to local storage.
-2. `useState` means the state is coupled with this component instance—which means it won’t sync across tabs.
-3. Lastly, `useState` means we need to sync local storage with changes, so that the next time the app is loaded, we get the latest state that was set.
+- We only use local storage as an initial state for React’s `useState`. This is needed to achieve reactivity, otherwise React won’t update the UI (re-render) on direct updates to local storage.
+- `useState` means the state is coupled with this component instance—which means it won’t sync across tabs.
+- Lastly, `useState` means we need to sync local storage with changes, so that the next time the app is loaded, we get the latest state that was set.
 
 ### Example with `useSyncExternalStore`
 
-The correct way to do it 💪
+When done properly:
+
+![A wrong example GIF](/use-sync-external-store/correct-example.gif "The state is synced and consistent with local storage across tabs and windows")
 
 Code that’s used in the example above:
 

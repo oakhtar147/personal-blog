@@ -1,5 +1,7 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import rehypePrettyCode from "rehype-pretty-code";
+import remarkGfm from "remark-gfm";
+import { visit } from "unist-util-visit";
 
 export const Blog = defineDocumentType(() => ({
 	name: "Blog",
@@ -27,14 +29,23 @@ export default makeSource({
 	contentDirPath: "content",
 	documentTypes: [Blog],
 	mdx: {
+		remarkPlugins: [remarkGfm],
 		rehypePlugins: [
-			[
-				// @ts-expect-error
-				rehypePrettyCode,
-				{
-					theme: "vesper",
-				},
-			],
+			// @ts-expect-error
+			[rehypePrettyCode, { theme: "vesper" }],
+			() => (tree) => {
+				visit(tree, (node) => {
+					if (node.type === "element" && node.tagName === "p") {
+						if (node.children.length) {
+							const [imgEl] = node.children;
+							node.properties.__hasImageDescendant__ = imgEl.tagName === "img";
+							return;
+						}
+
+						node.properties.__hasImageDescendant__ = false;
+					}
+				});
+			},
 		],
 	},
 });

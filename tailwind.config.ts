@@ -31,9 +31,14 @@ const config = {
 			colors: {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
+
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
-				muted: "hsl(var(--muted))",
+
+				muted: {
+					DEFAULT: "hsl(var(--muted))",
+					foreground: "hsl(var(--muted-foreground))",
+				},
 			},
 			borderRadius: {
 				lg: "var(--radius)",

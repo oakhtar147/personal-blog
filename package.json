@@ -1,36 +1,40 @@
 {
-	"name": "hadith",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint",
-		"generate": "contentlayer build"
-	},
-	"dependencies": {
-		"class-variance-authority": "^0.7.0",
-		"clsx": "^2.1.0",
-		"contentlayer": "^0.3.4",
-		"next": "14.1.4",
-		"next-contentlayer": "^0.3.4",
-		"next-mdx-remote": "^4.4.1",
-		"react": "^18",
-		"react-dom": "^18",
-		"tailwind-merge": "^2.2.2"
-	},
-	"devDependencies": {
-		"@types/node": "^20",
-		"@types/react": "^18",
-		"@types/react-dom": "^18",
-		"autoprefixer": "^10.0.1",
-		"eslint": "^8",
-		"eslint-config-next": "14.1.4",
-		"postcss": "^8",
-		"rehype-pretty-code": "^0.13.1",
-		"shiki": "^1.2.4",
-		"tailwindcss": "^3.3.0",
-		"typescript": "^5"
-	}
+  "name": "hadith",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "generate": "contentlayer build"
+  },
+  "dependencies": {
+    "@radix-ui/react-icons": "^1.3.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "contentlayer": "^0.3.4",
+    "next": "14.1.4",
+    "next-contentlayer": "^0.3.4",
+    "next-mdx-remote": "^4.4.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "tailwind-merge": "^2.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.4",
+    "image-size": "^1.1.1",
+    "postcss": "^8",
+    "rehype-pretty-code": "^0.13.1",
+    "remark-gfm": "3.0.1",
+    "shiki": "^1.2.4",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5",
+    "unist-util-visit": "^5.0.0"
+  }
 }
