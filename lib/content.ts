@@ -17,3 +17,7 @@ export function getPublishedBlogs(allBlogs: Blog[], opts?: Options) {
 
 	return filtered;
 }
+
+export function getBlogBySlug(allBlogs: Blog[], slug: string) {
+	return allBlogs.find((blog) => blog.slug === slug);
+}

@@ -2,6 +2,13 @@ import { allBlogs } from "@/.contentlayer/generated";
 import { BlogLink } from "@/components/blog-link";
 import { H2, P } from "@/components/mdx";
 import { getPublishedBlogs } from "@/lib/content";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Osama Akhtar",
+	description:
+		"I build things using code. Currently, Software Engineer at Merantix Momentum. Located in Berlin, Germany.",
+};
 
 export default async function Home() {
 	const publishedBlogs = getPublishedBlogs(allBlogs, { sort: true });
