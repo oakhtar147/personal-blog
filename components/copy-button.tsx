@@ -20,16 +20,25 @@ export function CopyButton({
 				setTimeout(() => setLoading(false), 1000);
 			}}
 			className={cn(
-				"bg-muted text-white px-2 py-1 rounded-sm text-sm inline-flex items-center font-sans shadow-sm hover:bg-muted/80 hover:scale-[.997] transition-all",
+				"bg-muted text-white px-2 py-1 h-7 rounded-sm text-sm inline-flex items-center font-sans shadow-sm hover:bg-muted/80 hover:scale-[.997] transition-all",
 				className
 			)}
 		>
 			{children}
-			{loading ? (
-				<CheckIcon className="ml-2 text-green-500" />
-			) : (
-				<CopyIcon className="ml-2" />
-			)}
+			<span className="relative h-full w-4">
+				<CheckIcon
+					className={cn(
+						"opacity-0 text-green-500 top-[3px] -right-[11px] transition-opacity absolute mr-2",
+						loading && "opacity-100"
+					)}
+				/>
+				<CopyIcon
+					className={cn(
+						"absolute top-[3px] -right-[11px] mr-2",
+						loading && "opacity-0 transition-opacity"
+					)}
+				/>
+			</span>
 		</button>
 	);
 }

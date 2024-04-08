@@ -9,9 +9,9 @@ export function Nav() {
 				<Image
 					src="/scribble.svg"
 					priority
-					alt="scribble"
-					width={50}
-					height={50}
+					alt="Scribble"
+					width={60}
+					height={60}
 				/>
 				<h1 className="font-extrabold text-white">OSAMA</h1>
 			</Link>
