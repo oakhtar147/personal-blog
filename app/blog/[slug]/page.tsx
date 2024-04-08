@@ -35,7 +35,7 @@ export default function Blog({ params }: BlogPageParams) {
 	}
 
 	return (
-		<article>
+		<article id={blog.slug}>
 			<MDXContent source={blog.body.code} />
 			<BlogFooter dateWritten={new Date(blog.date)} />
 		</article>

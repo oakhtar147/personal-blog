@@ -10,7 +10,7 @@ export const mdxComponents = {
 		<h1
 			{...props}
 			className={cn(
-				"font-extrabold mt-8 scroll-m-20 font-sans text-white",
+				"font-extrabold mt-8 relative scroll-m-20 group font-sans text-white",
 				className
 			)}
 		/>
@@ -20,7 +20,7 @@ export const mdxComponents = {
 		<h2
 			{...props}
 			className={cn(
-				"font-bold mt-8 scroll-m-20 font-sans text-white",
+				"font-bold mt-8 relative scroll-m-20 group font-sans text-white",
 				className
 			)}
 		/>
@@ -30,7 +30,7 @@ export const mdxComponents = {
 		<h3
 			{...props}
 			className={cn(
-				"font-semibold mt-8 scroll-m-20 text-lg font-sans text-white",
+				"font-semibold mt-8 relative scroll-m-20 group text-lg font-sans text-white",
 				className
 			)}
 		/>
@@ -40,18 +40,13 @@ export const mdxComponents = {
 		<h4
 			{...props}
 			className={cn(
-				"font-semibold mt-8 scroll-m-20 text-md font-sans text-white",
+				"font-semibold mt-8 relative scroll-m-20 group text-md font-sans text-white",
 				className
 			)}
 		/>
 	),
 
-	p: ({
-		className,
-		children,
-
-		...props
-	}: React.ComponentProps<"p">) => {
+	p: ({ className, children, ...props }: React.ComponentProps<"p">) => {
 		// Pleases TypeScript when passing `components` to <Content />
 		const { __hasImageDescendant__ } =
 			props as unknown as React.ComponentProps<"p"> & {
@@ -72,16 +67,37 @@ export const mdxComponents = {
 		);
 	},
 
-	a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
-		<a
-			{...props}
-			target="_blank"
-			className={cn(
-				"underline font-medium underline-offset-4 hover:text-muted-foreground transition-colors",
-				className
-			)}
-		/>
-	),
+	a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => {
+		const { __isAnchorLink__ } =
+			props as unknown as React.ComponentProps<"a"> & {
+				__isAnchorLink__?: boolean;
+			};
+
+		if (__isAnchorLink__) {
+			return (
+				<a
+					{...props}
+					className={cn(
+						"absolute -left-7 w-7 text-center opacity-0 text-foreground text-lg hover:text-white transition-all group-hover:opacity-100",
+						className
+					)}
+				>
+					#
+				</a>
+			);
+		}
+
+		return (
+			<a
+				{...props}
+				target="_blank"
+				className={cn(
+					"underline font-medium underline-offset-4 hover:text-muted-foreground transition-colors",
+					className
+				)}
+			/>
+		);
+	},
 
 	img: ({ className, ...other }: React.ComponentProps<"img">) => {
 		const props = { ...other };

@@ -1,5 +1,7 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { visit } from "unist-util-visit";
 
@@ -34,6 +36,17 @@ export default makeSource({
 		rehypePlugins: [
 			// @ts-expect-error
 			[rehypePrettyCode, { theme: "vesper" }],
+			[rehypeSlug],
+			[
+				rehypeAutolinkHeadings,
+				{
+					properties: {
+						className: ["subheading-link"],
+						ariaLabel: "Link to section",
+						__isAnchorLink__: true,
+					},
+				},
+			],
 			() => (tree) => {
 				visit(tree, (node) => {
 					if (node.type === "element" && node.tagName === "p") {
