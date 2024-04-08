@@ -1,5 +1,6 @@
 import { formatBlogDate } from "@/lib/utils";
 import Image from "next/image";
+import { CopyButton } from "./button";
 import { mdxComponents } from "./mdx-content";
 
 export function BlogFooter({ dateWritten }: { dateWritten: Date }) {
@@ -13,6 +14,7 @@ export function BlogFooter({ dateWritten }: { dateWritten: Date }) {
 			<mdxComponents.p className="!mt-0">
 				Written on {formatBlogDate(dateWritten)}
 			</mdxComponents.p>
+			<CopyButton className="mt-1">Copy article link</CopyButton>
 		</section>
 	);
 }
