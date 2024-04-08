@@ -12,6 +12,7 @@ export const Blog = defineDocumentType(() => ({
 		description: { type: "string", required: true },
 		date: { type: "date", required: true },
 		published: { type: "boolean", required: true },
+		imageDirPath: { type: "string", required: false },
 	},
 	computedFields: {
 		url: {

@@ -36,6 +36,16 @@ export const mdxComponents = {
 		/>
 	),
 
+	h4: ({ className, ...props }: React.ComponentProps<"h4">) => (
+		<h4
+			{...props}
+			className={cn(
+				"font-semibold mt-8 scroll-m-20 text-md font-sans text-white",
+				className
+			)}
+		/>
+	),
+
 	p: ({
 		className,
 		children,
@@ -99,7 +109,7 @@ export const mdxComponents = {
 				<picture>
 					<Image
 						{...props}
-						className={cn("w-full h-auto rounded-lg", className)}
+						className={cn("w-full h-auto rounded-sm", className)}
 						alt={props.alt || "Image"}
 						src={props.src}
 						width={(props.width as number) || 640}
@@ -124,7 +134,7 @@ export const mdxComponents = {
 	),
 
 	pre: ({ className, ...props }: React.ComponentProps<"pre">) => (
-		<div className="mb-4 mt-6 overflow-auto max-h-[640px] rounded-lg border ">
+		<div className="mb-4 mt-6 overflow-auto max-h-[640px] rounded-sm border ">
 			<pre
 				{...props}
 				className={cn(

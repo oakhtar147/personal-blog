@@ -15,6 +15,7 @@ export function NavLink({
 
 	return (
 		<Link
+			{...props}
 			href={href}
 			data-active={active}
 			className={cn(
