@@ -21,9 +21,26 @@ export async function generateMetadata(
 		return notFound();
 	}
 
+	const { title, description, date, url } = blog;
+	let ogImage = `/og?title=${encodeURIComponent(blog.title)}`;
+
 	return {
 		title: blog.title,
 		description: blog.description,
+		openGraph: {
+			url,
+			title,
+			description,
+			type: "article",
+			publishedTime: date,
+			images: [{ url: ogImage }],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
+			images: [ogImage],
+		},
 	};
 }
 

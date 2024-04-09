@@ -2,6 +2,7 @@ import { formatBlogDate } from "@/lib/utils";
 import AtEmail from "@/public/at-email.svg";
 import GitHub from "@/public/github.svg";
 import LinkedIn from "@/public/linkedin.svg";
+import rss from "@/public/rss.svg";
 import X from "@/public/x.svg";
 import { IconLink } from "./icon-link";
 
@@ -13,6 +14,7 @@ export function Footer() {
 				<b className="text-white">{formatBlogDate(new Date())}</b>.
 			</small>
 			<div className="flex gap-1">
+				<IconLink href="/rss" target="_blank" icon={rss} />
 				<IconLink
 					icon={X}
 					target="_blank"
