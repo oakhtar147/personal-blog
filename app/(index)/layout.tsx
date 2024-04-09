@@ -42,11 +42,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className="flex flex-col min-h-full emerald">
+		<html lang="en" className="emerald flex min-h-full flex-col">
 			<body
 				style={{ textRendering: "optimizeLegibility" }}
 				className={cn(
-					"flex flex-col grow bg-background font-sans antialiased px-[1.5em] w-[min(100%,720px)] mx-auto text-clamped",
+					"bg-background text-clamped mx-auto flex w-[min(100%,720px)] grow flex-col px-[1.5em] font-sans antialiased",
 					clearFaceFont.variable
 				)}
 			>

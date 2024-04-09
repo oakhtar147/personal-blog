@@ -4,8 +4,8 @@ import { NavLink } from "./nav-link";
 
 export function Nav() {
 	return (
-		<nav className="flex my-12 text-md tracking-tighter justify-between items-center">
-			<Link href="/" className="flex gap-1 items-center">
+		<nav className="text-md my-12 flex items-center justify-between tracking-tighter">
+			<Link href="/" className="flex items-center gap-1">
 				<Image
 					src="/scribble.svg"
 					priority
@@ -16,7 +16,7 @@ export function Nav() {
 				<h1 className="font-extrabold text-white">OSAMA</h1>
 			</Link>
 			<NavLink
-				className="px-2 hover:bg-muted rounded-md font-extrabold text-white tracking-normal transition-all data-[active=true]:bg-muted"
+				className="hover:bg-muted data-[active=true]:bg-muted rounded-md px-2 font-extrabold tracking-normal text-white transition-all"
 				href="/blog"
 			>
 				Blog

@@ -5,7 +5,7 @@ import { mdxComponents } from "./mdx-content";
 
 export function BlogFooter({ dateWritten }: { dateWritten: Date }) {
 	return (
-		<section className="text-lg mt-8 flex flex-col items-end">
+		<section className="mt-8 flex flex-col items-end text-lg">
 			<Image src="/signature.svg" width={128} height={128} alt="Signature" />
 			<dl className="mt-2 flex flex-col items-end">
 				<dt className="font-clearface font-bold">Osama Akhtar</dt>

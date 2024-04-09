@@ -8,7 +8,7 @@ import { IconLink } from "./icon-link";
 
 export function Footer() {
 	return (
-		<footer className="mt-36 mb-8 md:mb-12 flex flex-col md:flex-row gap-y-2 justify-between items-center">
+		<footer className="mb-8 mt-36 flex flex-col items-center justify-between gap-y-2 md:mb-12 md:flex-row">
 			<small className="text-xs font-bold">
 				I own all <b className="text-white">opinions</b> shared. Last updated{" "}
 				<b className="text-white">{formatBlogDate(new Date())}</b>.

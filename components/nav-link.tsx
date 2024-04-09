@@ -19,7 +19,7 @@ export function NavLink({
 			href={href}
 			data-active={active}
 			className={cn(
-				"px-2 hover:bg-muted rounded-md font-extrabold text-white tracking-normal transition-all data-[active=true]:bg-muted",
+				"hover:bg-muted data-[active=true]:bg-muted rounded-md px-2 font-extrabold tracking-normal text-white transition-all",
 				className
 			)}
 		>

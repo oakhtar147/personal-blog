@@ -14,7 +14,7 @@ export default async function Home() {
 	const publishedBlogs = getPublishedBlogs(allBlogs, { sort: true });
 
 	return (
-		<main className="h-full text-lg grow">
+		<main className="h-full grow text-lg">
 			<mdxComponents.p>I build things using code.</mdxComponents.p>
 			<mdxComponents.p>
 				Currently, Software Engineer at Merantix Momentum. Located in Berlin,

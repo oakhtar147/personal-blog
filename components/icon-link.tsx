@@ -11,7 +11,7 @@ export function IconLink({ className, icon, ...props }: IconLinkProps) {
 		<Link
 			{...props}
 			className={cn(
-				"p-2 rounded-full hover:bg-muted transition-all",
+				"hover:bg-muted rounded-full p-2 transition-all",
 				className
 			)}
 		>
