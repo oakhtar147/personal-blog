@@ -22,6 +22,7 @@ const config = {
 				clearface: "var(--font-clearface)",
 			},
 			fontSize: {
+				inherit: "inherit",
 				md: "16px",
 				clamped: "clamp(1.25rem, 2.225vw, 1.5rem)",
 			},

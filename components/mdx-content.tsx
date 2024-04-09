@@ -78,7 +78,7 @@ export const mdxComponents = {
 				<a
 					{...props}
 					className={cn(
-						"absolute -left-7 w-7 text-center opacity-0 text-foreground text-lg hover:text-white transition-all group-hover:opacity-100",
+						"absolute -left-7 w-full opacity-0 text-inherit !text-foreground transition-all group-hover:opacity-100",
 						className
 					)}
 				>
