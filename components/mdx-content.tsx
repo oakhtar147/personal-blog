@@ -67,9 +67,9 @@ export const mdxComponents = {
     );
   },
 
-  a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => {
-    const { __isAnchorLink__ } =
-      props as unknown as React.ComponentProps<"a"> & {
+  a: ({ className, ...rest }: React.HTMLAttributes<HTMLAnchorElement>) => {
+    const { __isAnchorLink__, ...props } =
+      rest as unknown as React.ComponentProps<"a"> & {
         __isAnchorLink__?: boolean;
       };
 

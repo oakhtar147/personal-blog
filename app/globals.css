@@ -3,42 +3,47 @@
 @tailwind utilities;
 
 @layer base {
-	:root {
-		--background: 182 21.13% 27.84%;
-		--foreground: 182.31 21.31% 76.08%;
-		--muted: 132 13% 40%;
-		--muted-foreground: 180 40% 82%;
+  :root {
+    --background: 182 21.13% 27.84%;
+    --foreground: 182.31 21.31% 76.08%;
+    --muted: 132 13% 40%;
+    --muted-foreground: 180 40% 82%;
 
-		--border: 135 12% 20%;
-		--input: 135 12% 20%;
+    --border: 135 12% 20%;
+    --input: 135 12% 20%;
 
-		--radius: 0.5rem;
-	}
+    --radius: 0.5rem;
+  }
 }
 
 @layer base {
-	* {
-		@apply border-border;
-	}
-	body {
-		@apply bg-background text-foreground;
-	}
+  html {
+    @apply scroll-smooth;
+  }
 
-	/* Firefox */
-	* {
-		scrollbar-width: thin;
-	}
+  * {
+    @apply border-border;
+  }
 
-	/* Chrome, Edge, and Safari */
-	*::-webkit-scrollbar {
-		width: 15px;
-	}
+  body {
+    @apply bg-background text-foreground;
+  }
 
-	*::-webkit-scrollbar-track {
-		border-radius: 5px;
-	}
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+  }
 
-	*::-webkit-scrollbar-thumb {
-		border-radius: 14px;
-	}
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  *::-webkit-scrollbar-track {
+    border-radius: 5px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    border-radius: 14px;
+  }
 }

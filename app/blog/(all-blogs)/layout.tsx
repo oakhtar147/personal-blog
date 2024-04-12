@@ -10,22 +10,22 @@ const clearFaceFont = localFont({
   variable: "--font-clearface",
   src: [
     {
-      path: "../../fonts/clearface-regular.ttf",
+      path: "../../../fonts/clearface-regular.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../fonts/clearface-italic.ttf",
+      path: "../../../fonts/clearface-italic.ttf",
       weight: "400",
       style: "italic",
     },
     {
-      path: "../../fonts/clearface-bold.ttf",
+      path: "../../../fonts/clearface-bold.ttf",
       weight: "700",
       style: "normal",
     },
     {
-      path: "../../fonts/clearface-bold-italic.ttf",
+      path: "../../../fonts/clearface-bold-italic.ttf",
       weight: "700",
       style: "italic",
     },
