@@ -1,10 +1,10 @@
-import "@/app/globals.css";
-import { Footer } from "@/components/footer";
-import { Nav } from "@/components/nav";
-import { cn } from "@/lib/utils";
-import { Analytics } from "@vercel/analytics/next";
-import type { Metadata } from "next";
-import localFont from "next/font/local";
+import "@/app/globals.css"
+import { Footer } from "@/components/footer"
+import { Nav } from "@/components/nav"
+import { cn } from "@/lib/utils"
+import { Analytics } from "@vercel/analytics/next"
+import type { Metadata } from "next"
+import localFont from "next/font/local"
 
 const clearFaceFont = localFont({
   variable: "--font-clearface",
@@ -30,17 +30,17 @@ const clearFaceFont = localFont({
       style: "italic",
     },
   ],
-});
+})
 
 export const metadata: Metadata = {
   title: "Blogs",
   description: "Blogs written by Osama Akhtar",
-};
+}
 
 export default function BlogLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" className="emerald flex min-h-full flex-col">
@@ -48,7 +48,7 @@ export default function BlogLayout({
         style={{ textRendering: "optimizeLegibility" }}
         className={cn(
           "text-clamped mx-auto flex w-[min(100%,720px)] grow flex-col px-[1.5em] font-sans antialiased",
-          clearFaceFont.variable,
+          clearFaceFont.variable
         )}
       >
         <Nav />
@@ -57,5 +57,5 @@ export default function BlogLayout({
         <Analytics />
       </body>
     </html>
-  );
+  )
 }

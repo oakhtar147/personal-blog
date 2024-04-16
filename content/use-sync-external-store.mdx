@@ -26,38 +26,38 @@ Let’s first see an example of a bad practice that does not work properly
 Code that’s used in the example above:
 
 ```tsx
-import React from "react";
+import React from "react"
 
-type SidebarState = "collapsed" | "expanded";
+type SidebarState = "collapsed" | "expanded"
 
-const get = () => localStorage.getItem("sidebar") as SidebarState;
-const set = (value: SidebarState) => localStorage.setItem("sidebar", value);
+const get = () => localStorage.getItem("sidebar") as SidebarState
+const set = (value: SidebarState) => localStorage.setItem("sidebar", value)
 
 if (!get()) {
-	set("collapsed");
+  set("collapsed")
 }
 
 function App() {
-	const [sidebarState, setSidebarState] = React.useState<SidebarState>(get());
+  const [sidebarState, setSidebarState] = React.useState<SidebarState>(get())
 
-	React.useEffect(() => {
-		set(sidebarState);
-	}, [sidebarState]);
+  React.useEffect(() => {
+    set(sidebarState)
+  }, [sidebarState])
 
-	const handleToggle = () =>
-		setSidebarState(sidebarState === "collapsed" ? "expanded" : "collapsed");
+  const handleToggle = () =>
+    setSidebarState(sidebarState === "collapsed" ? "expanded" : "collapsed")
 
-	return (
-		<>
-			<p>
-				The sidebar is{" "}
-				<span style={{ color: sidebarState === "collapsed" ? "red" : "green" }}>
-					{sidebarState}
-				</span>
-			</p>
-			<button onClick={handleToggle}>Toggle State</button>
-		</>
-	);
+  return (
+    <>
+      <p>
+        The sidebar is{" "}
+        <span style={{ color: sidebarState === "collapsed" ? "red" : "green" }}>
+          {sidebarState}
+        </span>
+      </p>
+      <button onClick={handleToggle}>Toggle State</button>
+    </>
+  )
 }
 ```
 
@@ -74,53 +74,53 @@ When done properly:
 Code that’s used in the example above:
 
 ```tsx {28-31}
-import React from "react";
+import React from "react"
 
-type SidebarState = "collapsed" | "expanded";
+type SidebarState = "collapsed" | "expanded"
 
 function setSidebarState(newValue: SidebarState) {
-	window.localStorage.setItem("sidebar", newValue);
-	// On localStoage.setItem, the storage event is only triggered on other tabs and windows.
-	// So we manually dispatch a storage event to trigger the subscribe function on the current window as well.
-	window.dispatchEvent(
-		new StorageEvent("storage", { key: "sidebar", newValue })
-	);
+  window.localStorage.setItem("sidebar", newValue)
+  // On localStoage.setItem, the storage event is only triggered on other tabs and windows.
+  // So we manually dispatch a storage event to trigger the subscribe function on the current window as well.
+  window.dispatchEvent(
+    new StorageEvent("storage", { key: "sidebar", newValue })
+  )
 }
 
 const store = {
-	getSnapshot: () => localStorage.getItem("sidebar") as SidebarState,
-	subscribe: (listener: () => void) => {
-		window.addEventListener("storage", listener);
-		return () => void window.removeEventListener("storage", listener);
-	},
-};
+  getSnapshot: () => localStorage.getItem("sidebar") as SidebarState,
+  subscribe: (listener: () => void) => {
+    window.addEventListener("storage", listener)
+    return () => void window.removeEventListener("storage", listener)
+  },
+}
 
 // Set the initial value.
 if (!store.getSnapshot()) {
-	localStorage.setItem("sidebar", "collapsed" satisfies SidebarState);
+  localStorage.setItem("sidebar", "collapsed" satisfies SidebarState)
 }
 
 function App() {
-	const sidebarState = React.useSyncExternalStore(
-		store.subscribe,
-		store.getSnapshot
-	);
+  const sidebarState = React.useSyncExternalStore(
+    store.subscribe,
+    store.getSnapshot
+  )
 
-	const handleToggle = () => {
-		setSidebarState(sidebarState === "expanded" ? "collapsed" : "expanded");
-	};
+  const handleToggle = () => {
+    setSidebarState(sidebarState === "expanded" ? "collapsed" : "expanded")
+  }
 
-	return (
-		<>
-			<p>
-				The sidebar is
-				<span style={{ color: sidebarState === "collapsed" ? "red" : "green" }}>
-					{sidebarState}
-				</span>
-			</p>
-			<button onClick={handleToggle}>Toggle State</button>
-		</>
-	);
+  return (
+    <>
+      <p>
+        The sidebar is
+        <span style={{ color: sidebarState === "collapsed" ? "red" : "green" }}>
+          {sidebarState}
+        </span>
+      </p>
+      <button onClick={handleToggle}>Toggle State</button>
+    </>
+  )
 }
 ```
 
@@ -135,28 +135,28 @@ function App() {
 Finally, you can extract the logic to a custom hook:
 
 ```tsx
-import React from "react";
+import React from "react"
 
-type SidebarState = "collapsed" | "expanded";
+type SidebarState = "collapsed" | "expanded"
 
 function useSidebarState() {
-	const setSidebarState = (newValue: SidebarState) => {
-		window.localStorage.setItem("sidebar", newValue);
-		window.dispatchEvent(
-			new StorageEvent("storage", { key: "sidebar", newValue })
-		);
-	};
+  const setSidebarState = (newValue: SidebarState) => {
+    window.localStorage.setItem("sidebar", newValue)
+    window.dispatchEvent(
+      new StorageEvent("storage", { key: "sidebar", newValue })
+    )
+  }
 
-	const getSnapshot = () => localStorage.getItem("sidebar") as SidebarState;
+  const getSnapshot = () => localStorage.getItem("sidebar") as SidebarState
 
-	const subscribe = (listener: () => void) => {
-		window.addEventListener("storage", listener);
-		return () => void window.removeEventListener("storage", listener);
-	};
+  const subscribe = (listener: () => void) => {
+    window.addEventListener("storage", listener)
+    return () => void window.removeEventListener("storage", listener)
+  }
 
-	const store = React.useSyncExternalStore(subscribe, getSnapshot);
+  const store = React.useSyncExternalStore(subscribe, getSnapshot)
 
-	return [store, setSidebarState] as const;
+  return [store, setSidebarState] as const
 }
 ```
 
