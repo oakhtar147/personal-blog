@@ -1,9 +1,9 @@
-import { cn } from "@/lib/utils";
-import sizeOf from "image-size";
-import { useMDXComponent } from "next-contentlayer/hooks";
-import Image from "next/image";
-import path from "path";
-import React from "react";
+import { cn } from "@/lib/utils"
+import sizeOf from "image-size"
+import { useMDXComponent } from "next-contentlayer/hooks"
+import Image from "next/image"
+import path from "path"
+import React from "react"
 
 export const mdxComponents = {
   h1: ({ className, ...props }: React.ComponentProps<"h1">) => (
@@ -11,7 +11,7 @@ export const mdxComponents = {
       {...props}
       className={cn(
         "group relative mt-8 scroll-m-8 font-sans font-extrabold text-white",
-        className,
+        className
       )}
     />
   ),
@@ -21,7 +21,7 @@ export const mdxComponents = {
       {...props}
       className={cn(
         "group relative mt-8 scroll-m-8 font-sans font-bold text-white",
-        className,
+        className
       )}
     />
   ),
@@ -31,7 +31,7 @@ export const mdxComponents = {
       {...props}
       className={cn(
         "group relative mt-8 scroll-m-8 font-sans text-lg font-semibold text-white",
-        className,
+        className
       )}
     />
   ),
@@ -41,7 +41,7 @@ export const mdxComponents = {
       {...props}
       className={cn(
         "text-md group relative mt-8 scroll-m-8 font-sans font-semibold text-white",
-        className,
+        className
       )}
     />
   ),
@@ -50,11 +50,11 @@ export const mdxComponents = {
     // Pleases TypeScript when passing `components` to <Content />
     const { __hasImageDescendant__ } =
       props as unknown as React.ComponentProps<"p"> & {
-        __hasImageDescendant__: boolean;
-      };
+        __hasImageDescendant__: boolean
+      }
 
     if (__hasImageDescendant__) {
-      return children;
+      return children
     }
 
     return (
@@ -64,14 +64,14 @@ export const mdxComponents = {
       >
         {children}
       </p>
-    );
+    )
   },
 
   a: ({ className, ...rest }: React.HTMLAttributes<HTMLAnchorElement>) => {
     const { __isAnchorLink__, ...props } =
       rest as unknown as React.ComponentProps<"a"> & {
-        __isAnchorLink__?: boolean;
-      };
+        __isAnchorLink__?: boolean
+      }
 
     if (__isAnchorLink__) {
       return (
@@ -79,12 +79,12 @@ export const mdxComponents = {
           {...props}
           className={cn(
             "!text-foreground absolute left-[-20px] w-full text-inherit opacity-0 transition-all group-hover:opacity-100 md:-left-7",
-            className,
+            className
           )}
         >
           #
         </a>
-      );
+      )
     }
 
     return (
@@ -93,31 +93,31 @@ export const mdxComponents = {
         target="_blank"
         className={cn(
           "hover:text-muted-foreground font-medium underline underline-offset-4 transition-colors",
-          className,
+          className
         )}
       />
-    );
+    )
   },
 
   img: ({ className, ...other }: React.ComponentProps<"img">) => {
-    const props = { ...other };
-    if (!props.src) return null;
+    const props = { ...other }
+    if (!props.src) return null
 
-    const isLocalImage = !props.src.startsWith("http");
+    const isLocalImage = !props.src.startsWith("http")
 
     if (!props.width && !props.height && isLocalImage) {
-      const basePath = "/pictures";
+      const basePath = "/pictures"
 
       if (!props.src.startsWith(basePath) && isLocalImage) {
-        props.src = `${basePath}${props.src}`;
+        props.src = `${basePath}${props.src}`
       }
 
       const { width, height } = sizeOf(
-        path.join(process.cwd(), "public", props.src),
-      );
+        path.join(process.cwd(), "public", props.src)
+      )
 
-      props.width = width || 640;
-      props.height = height || 640;
+      props.width = width || 640
+      props.height = height || 640
     }
 
     return (
@@ -136,7 +136,7 @@ export const mdxComponents = {
           {props.title}
         </figcaption>
       </figure>
-    );
+    )
   },
 
   blockquote: ({ className, ...props }: React.ComponentProps<"blockquote">) => (
@@ -144,7 +144,7 @@ export const mdxComponents = {
       {...props}
       className={cn(
         "border-border mt-6 border-l-2 pl-6 text-[90%] italic",
-        className,
+        className
       )}
     />
   ),
@@ -155,7 +155,7 @@ export const mdxComponents = {
         {...props}
         className={cn(
           "relative overflow-auto py-2 [&>code]:bg-[unset] [&>code]:p-[unset] [&>code]:font-normal",
-          className,
+          className
         )}
       />
     </div>
@@ -166,7 +166,7 @@ export const mdxComponents = {
       {...props}
       className={cn(
         "bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold [&>span[data-line]]:px-4",
-        className,
+        className
       )}
     />
   ),
@@ -185,10 +185,10 @@ export const mdxComponents = {
   li: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <li className={cn("font-clearface mt-2", className)} {...props} />
   ),
-};
+}
 
 export function MDXContent({ source }: { source: string }) {
-  const Content = useMDXComponent(source);
+  const Content = useMDXComponent(source)
 
-  return <Content components={mdxComponents} />;
+  return <Content components={mdxComponents} />
 }

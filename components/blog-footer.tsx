@@ -1,7 +1,7 @@
-import { formatBlogDate } from "@/lib/utils";
-import Image from "next/image";
-import { CopyButton } from "./copy-button";
-import { mdxComponents } from "./mdx-content";
+import { formatBlogDate } from "@/lib/utils"
+import Image from "next/image"
+import { CopyButton } from "./copy-button"
+import { mdxComponents } from "./mdx-content"
 
 export function BlogFooter({ dateWritten }: { dateWritten: Date }) {
   return (
@@ -22,5 +22,5 @@ export function BlogFooter({ dateWritten }: { dateWritten: Date }) {
       </mdxComponents.p>
       <CopyButton className="mt-1">Copy blog link</CopyButton>
     </section>
-  );
+  )
 }

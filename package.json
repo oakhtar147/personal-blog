@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "format:write": "prettier --write .",
+    "format:check": "prettier --check .",
     "generate": "contentlayer build"
   },
   "dependencies": {
