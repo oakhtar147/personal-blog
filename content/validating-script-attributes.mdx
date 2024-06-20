@@ -1,0 +1,55 @@
+---
+title: Validating attributes passed to a script running in the browser
+description: We use <script /> tags to inject JavaScript code that runs on the browser. In some cases, we need to externally pass data to a script when it is being initialised and executed.
+date: 2024-06-20
+published: true
+---
+
+# Validating attributes passed to a script running in the browser
+
+We use `<script />` tags to inject JavaScript code that runs on the browser.
+In some cases, we need to externally pass data to a script when it is being initialised and executed.
+Here's how to pass data and then validate it inside the script.
+
+### A/B Testing Example
+
+Imagine you have a script called ab-testing.js that is responsible for enabling one of two feature correlated flows within your application.
+We can expect a data- attribute which will determine which feature to show. For example:
+
+```html
+<script src="./ab-testing.js" data-variant="a"></script>
+```
+
+It is now important that any client consuming your script passes the `data-variant` exactly either `a` or `b`.
+So within the entry-point of your script, you can validate that.
+
+```ts
+function getFeatureVariantOrThrow() {
+  const script = document.currentScript
+  const variant = script?.getAttribute("data-variant")
+
+  if (!variant) {
+    throw new Error("Please pass a data-variant attribute to the script tag")
+  }
+
+  if (["a", "b"].includes(variant)) {
+    return variant
+  }
+
+  throw new Error(
+    'Invalid value for data-variant. Please pass either "a" or "b"'
+  )
+}
+
+const variant = getFeatureVariantOrThrow()
+```
+
+With this, any application that uses your script in their
+`<head />` will need to provide the correct data-variant as well.
+If not, they'll see an error in the browser console:
+
+![Browser Error](/validating-script-attributes/error.png "Browser displaying the error that our script throws")
+
+### Summary
+
+In this short article, we discussed a very specific use case of passing data- attributes to scripts and then validating them within the script.
